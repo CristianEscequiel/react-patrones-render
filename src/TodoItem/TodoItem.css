@@ -1,0 +1,27 @@
+.TodoItem {
+    display: flex;
+    position: relative;
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green-muted);
+    border: 1px solid var(--bg-panel);
+    margin-top:24px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    
+}
+
+.TodoItem-p {
+    margin: 24px 0px 24px 24px;
+    width: calc(100% - 120px);
+    font-size: 10px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.TodoItem-p--complete {
+    text-decoration: line-through;
+}
+
+

@@ -1,0 +1,25 @@
+.CreateTodoButton {
+    position: sticky;
+    bottom: 16px;
+    display: block;
+    margin: 16px auto 24px;
+    z-index: 1;
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--green-primary) ;
+    background-color: var(--bg-main);
+    border-radius: 100%;
+    border: 1px solid ;
+    padding: 1px;
+    padding-left: 9px;
+    padding-right: 9px;
+    cursor:pointer;
+    transition:.3s ease;
+    z-index: 1;
+}
+.CreateTodoButton:hover { 
+    transform: scale(1.2);
+    transform: rotate(180deg);
+    color: var(--bg-main) ;
+    background-color:var(--green-primary) ;
+}

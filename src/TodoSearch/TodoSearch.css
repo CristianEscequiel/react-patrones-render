@@ -1,0 +1,11 @@
+.TodoSearch {
+    width: 95%;
+    padding: 8px;
+    text-align: center;
+    color: var(--greeen-secondary);
+    align-items: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    background-color: var(--green-muted);
+    border: 1px solid var(--green-primary)
+}
