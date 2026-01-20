@@ -1,7 +1,7 @@
 import './TodoSearch.css'
 
 
-function TodoSearch({searchValue ,setSerachValue}) {
+function TodoSearch({searchValue ,setSerachValue , loading}) {
   return (
     <input 
     className='TodoSearch'
@@ -9,6 +9,7 @@ function TodoSearch({searchValue ,setSerachValue}) {
     value={searchValue}
     onChange={(event)=> 
       setSerachValue(event.target.value)}
+    disabled={loading}
     />
   );
 }

@@ -11,6 +11,7 @@ import { EmptyTodos } from '../EmptyTodos';
 import { CreateTodoButton } from '../CreateTodoButton';
 import { TodoForm } from '../TodoForm'
 import { Modal } from '../Modal';
+import { ChangeAlertWithStorageListener } from '../ChangeAlert';
 
 function App() {
       const {
@@ -25,18 +26,22 @@ function App() {
         setSerachValue,
         completedTodos,
         totalTodos,
-        addtodo
+        addtodo,
+        sincronizeTodos
     } = useTodos()
 
     return (
         <>
-            <TodoHeader>
+            <TodoHeader
+            loading={loading}>
                 <TodoCounter
                     totalTodos={totalTodos}
-                    completedTodos={completedTodos} />
+                    completedTodos={completedTodos}
+                     />
                 <TodoSearch
                     searchValue={searchValue}
-                    setSerachValue={setSerachValue} />
+                    setSerachValue={setSerachValue}
+                    />
             </TodoHeader>
                 <TodoList
                 error={error}
@@ -49,15 +54,15 @@ function App() {
                 onEmptyTodos={()=> <EmptyTodos /> }
                 onEmptySearchResults={
                     (searchText)=> <p>No hay resuñtados para {searchText}</p> }
-                // render = { todo => (
-                //         <TodoItem
-                //             onComplete={() => completeTodo(todo.text,
-                //                 todo.completed)}
-                //             onDelete={() => deleteTodo(todo.text)}
-                //             key={todo.text}
-                //             text={todo.text}
-                //             completed={todo.completed} />
-                //     )} 
+                render = { todo => (
+                        <TodoItem
+                            onComplete={() => completeTodo(todo.text,
+                                todo.completed)}
+                            onDelete={() => deleteTodo(todo.text)}
+                            key={todo.text}
+                            text={todo.text}
+                            completed={todo.completed} />
+                    )} 
                 >
 
                 { todo => (
@@ -72,8 +77,6 @@ function App() {
                 
                 </TodoList>
 
-                <CreateTodoButton setOpenModal={setOpenModal} />
-
                 {openModal && (
                     <Modal>
                         <TodoForm
@@ -82,6 +85,11 @@ function App() {
                     </Modal>
 
                 )}
+
+                <CreateTodoButton setOpenModal={setOpenModal} />
+
+                <ChangeAlertWithStorageListener 
+                sincronize={sincronizeTodos} />
             </>
             );
 }

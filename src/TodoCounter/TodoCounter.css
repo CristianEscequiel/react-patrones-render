@@ -13,3 +13,7 @@ padding: 40px
 .hidden {
     display: none;
 }
+
+.TodoCounter--loading { 
+    opacity: 25%;
+}

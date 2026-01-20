@@ -9,3 +9,7 @@
     background-color: var(--green-muted);
     border: 1px solid var(--green-primary)
 }
+
+.TodoSearch:disabled {
+    opacity: 25%;
+}
