@@ -14,84 +14,92 @@ import { Modal } from '../Modal';
 import { ChangeAlertWithStorageListener } from '../ChangeAlert';
 
 function App() {
-      const {
+    const { 
+        states ,
+        stateUpdaters
+    } = useTodos()
+
+    const {
         loading,
+        searchedTodos,
         error,
-        filterTodos,
-        completeTodo,
-        deleteTodo,
         openModal,
-        setOpenModal,
         searchValue,
-        setSerachValue,
         completedTodos,
         totalTodos,
+    } = states
+
+    const {
+        deleteTodo,
+        completeTodo,
         addtodo,
-        sincronizeTodos
-    } = useTodos()
+        sincronizeTodos,
+        setSerachValue,
+        setOpenModal,
+    } = stateUpdaters
 
     return (
         <>
             <TodoHeader
-            loading={loading}>
+                loading={loading}>
                 <TodoCounter
                     totalTodos={totalTodos}
                     completedTodos={completedTodos}
-                     />
+                />
                 <TodoSearch
                     searchValue={searchValue}
                     setSerachValue={setSerachValue}
-                    />
+                />
             </TodoHeader>
-                <TodoList
+            <TodoList
                 error={error}
                 loading={loading}
-                filterTodos={filterTodos}
+                filterTodos={searchedTodos}
                 totalTodos={totalTodos}
                 searchText={searchValue}
-                onError={()=> <TodosError /> }
-                onLoading={()=>  <TodosLoading /> }
-                onEmptyTodos={()=> <EmptyTodos /> }
+                onError={() => <TodosError />}
+                onLoading={() => <TodosLoading />}
+                onEmptyTodos={() => <EmptyTodos />}
                 onEmptySearchResults={
-                    (searchText)=> <p>No hay resuñtados para {searchText}</p> }
-                render = { todo => (
-                        <TodoItem
-                            onComplete={() => completeTodo(todo.text,
-                                todo.completed)}
-                            onDelete={() => deleteTodo(todo.text)}
-                            key={todo.text}
-                            text={todo.text}
-                            completed={todo.completed} />
-                    )} 
-                >
+                    (searchText) => <p>No hay resuñtados para {searchText}</p>}
+                render={todo => (
+                    <TodoItem
+                        onComplete={() => completeTodo(todo.text,
+                            todo.completed)}
+                        onDelete={() => deleteTodo(todo.text)}
+                        key={todo.text}
+                        text={todo.text}
+                        completed={todo.completed} />
+                )}
+            >
 
-                { todo => (
-                        <TodoItem
-                            onComplete={() => completeTodo(todo.text,
-                                todo.completed)}
-                            onDelete={() => deleteTodo(todo.text)}
-                            key={todo.text}
-                            text={todo.text}
-                            completed={todo.completed} />
-                    )}
-                
-                </TodoList>
-
-                {openModal && (
-                    <Modal>
-                        <TodoForm
-                        setOpenModal={setOpenModal}
-                        addtodo={addtodo} />
-                    </Modal>
-
+                {todo => (
+                    <TodoItem
+                        onComplete={() => completeTodo(todo.text,
+                            todo.completed)}
+                        onDelete={() => deleteTodo(todo.text)}
+                        key={todo.text}
+                        text={todo.text}
+                        completed={todo.completed} />
                 )}
 
-                <CreateTodoButton setOpenModal={setOpenModal} />
+            </TodoList>
 
-                <ChangeAlertWithStorageListener 
+            {openModal && (
+                <Modal>
+                    <TodoForm
+                        setOpenModal={setOpenModal}
+                        addtodo={addtodo} />
+                </Modal>
+
+            )}
+
+            <CreateTodoButton setOpenModal={setOpenModal} />
+
+            <ChangeAlertWithStorageListener
                 sincronize={sincronizeTodos} />
-            </>
-            );
+        </>
+    );
 }
 
 export default App;
